@@ -43,19 +43,19 @@
         {
             <tr>
                 <td class="text-md-center">
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @item.Id
                 </td>
                 <td class="text-md-center">
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @item.Title
                 </td>
                 <td class="text-md-center">
-                    @Html.DisplayFor(modelItem => item.Genre)
+                    @item.Genre
                 </td>
                 <td class="text-md-right">
-                    @Html.DisplayFor(modelItem => item.Length)
+                    @item.Length
                 </td>
                 <td class="text-md-right">
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    @item.ReleaseDate.ToString("dd/MM/yyyy")
                 </td>
                 <td class="text-md-right">
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
