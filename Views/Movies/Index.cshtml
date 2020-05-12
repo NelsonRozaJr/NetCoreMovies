@@ -58,11 +58,11 @@
                     @Html.DisplayFor(modelItem => item.ReleaseDate)
                 </td>
                 <td class="text-md-right">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary">
-                        <i class="far fa-edit"></i>
-                    </a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
                         <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                        <i class="far fa-edit"></i>
                     </a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
                         <i class="fas fa-trash-alt"></i>

@@ -21,11 +21,13 @@ namespace NetCoreMovies.Data.Repository
 
         public void Add(Movie movie)
         {
+            movie.SaveDate = DateTime.Now;
             _context.Add(movie);
         }
 
         public void Update(Movie movie)
         {
+            movie.UpdateDate = DateTime.Now;
             _context.Update(movie);
         }
 

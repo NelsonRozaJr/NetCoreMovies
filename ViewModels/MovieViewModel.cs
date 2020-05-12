@@ -35,6 +35,8 @@ namespace NetCoreMovies.ViewModels
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
+        public DateTime SaveDate { get; set; }
+
         public List<SelectListItem> GenreItems { get; set; }
     }
 }
