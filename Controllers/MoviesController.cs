@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetCoreMovies.Data.Domain;
 using NetCoreMovies.Data.Repository.Interfaces;
-using NetCoreMovies.ViewModel;
+using NetCoreMovies.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,18 +11,20 @@ namespace NetCoreMovies.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IMovieRepository _repository;
+        private readonly IMovieRepository _movieRepository;
+        private readonly IGenreRepository _genreRepository;
         private readonly IMapper _mapper;
 
-        public MoviesController(IMovieRepository repository, IMapper mapper)
+        public MoviesController(IMovieRepository movieRepository, IGenreRepository genreRepository, IMapper mapper)
         {
-            _repository = repository;
+            _movieRepository = movieRepository;
+            _genreRepository = genreRepository;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var movies = await _repository.ToListAsync();
+            var movies = await _movieRepository.ToListAsync();
             var movieViewModel = _mapper.Map<List<MovieViewModel>>(movies);
 
             return View(movieViewModel);
@@ -35,7 +37,7 @@ namespace NetCoreMovies.Controllers
                 return NotFound();
             }
 
-            var movie = await _repository.FirstOrDefaultAsync(m => m.Id == id);
+            var movie = await _movieRepository.FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -48,7 +50,13 @@ namespace NetCoreMovies.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var movieViewModel = new MovieViewModel
+            {
+                GenreItems = _genreRepository.GetGenreItems(),
+                ReleaseDate = System.DateTime.Now
+            };
+
+            return View(movieViewModel);
         }
 
         [HttpPost]
@@ -58,8 +66,8 @@ namespace NetCoreMovies.Controllers
             if (ModelState.IsValid)
             {
                 var movie = _mapper.Map<Movie>(model);
-                _repository.Add(movie);
-                await _repository.SaveChangesAsync();
+                _movieRepository.Add(movie);
+                await _movieRepository.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -74,7 +82,7 @@ namespace NetCoreMovies.Controllers
                 return NotFound();
             }
 
-            var movie = await _repository.FindAsync(id);
+            var movie = await _movieRepository.FindAsync(id);
             if (movie == null)
             {
                 return NotFound();
@@ -99,12 +107,12 @@ namespace NetCoreMovies.Controllers
                 try
                 {
                     var movie = _mapper.Map<Movie>(model);
-                    _repository.Update(movie);
-                    await _repository.SaveChangesAsync();
+                    _movieRepository.Update(movie);
+                    await _movieRepository.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_repository.MovieExists(model.Id))
+                    if (!_movieRepository.MovieExists(model.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +135,7 @@ namespace NetCoreMovies.Controllers
                 return NotFound();
             }
 
-            var movie = await _repository.FirstOrDefaultAsync(m => m.Id == id);
+            var movie = await _movieRepository.FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -142,9 +150,9 @@ namespace NetCoreMovies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _repository.FindAsync(id);
-            _repository.Remove(movie);
-            await _repository.SaveChangesAsync();
+            var movie = await _movieRepository.FindAsync(id);
+            _movieRepository.Remove(movie);
+            await _movieRepository.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

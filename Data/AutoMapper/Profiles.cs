@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using NetCoreMovies.Data.Domain;
-using NetCoreMovies.ViewModel;
+using NetCoreMovies.ViewModels;
 
 namespace NetCoreMovies.Data.AutoMapper
 {
-    public class AutoMapperProfiles : Profile
+    public class Profiles : Profile
     {
-        public AutoMapperProfiles()
+        public Profiles()
         {
             CreateMap<Movie, MovieViewModel>()
                 .ReverseMap();

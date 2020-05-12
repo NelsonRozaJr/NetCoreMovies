@@ -29,6 +29,7 @@ namespace NetCoreMovies
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddSingleton<IGenreRepository, GenreRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
