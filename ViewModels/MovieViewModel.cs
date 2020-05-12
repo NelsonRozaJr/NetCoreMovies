@@ -31,7 +31,7 @@ namespace NetCoreMovies.ViewModels
         public int Length { get; set; }
 
         [Required(ErrorMessage = "A data de lançamento é obrigatória")]
-        [Display(Name = "Data de lançamento")]
+        [Display(Name = "Lançamento")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 

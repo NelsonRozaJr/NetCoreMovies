@@ -4,9 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Excluir filme</h1>
-
-<h3>Deseja realmente excluir este filme?</h3>
+<h4>Excluir filme</h4>
+<hr />
+<h5>Deseja realmente excluir este filme?</h5>
 <div>
     <hr />
     <dl class="row">
@@ -50,7 +50,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Remover" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar para a lista de filmes</a>
+        <input type="submit" value="Excluir" class="btn btn-outline-danger" />
+        <a asp-action="Index" class="btn btn-outline-info">Lista de filmes</a>
     </form>
 </div>

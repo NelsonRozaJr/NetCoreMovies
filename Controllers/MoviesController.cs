@@ -89,6 +89,7 @@ namespace NetCoreMovies.Controllers
             }
 
             var movieViewModel = _mapper.Map<MovieViewModel>(movie);
+            movieViewModel.GenreItems = _genreRepository.GetGenreItems();
 
             return View(movieViewModel);
         }

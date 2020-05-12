@@ -4,61 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h4>Lista de filmes</h4>
+<div class="row">
+    <div class="col-6">
+        <h4>Lista de filmes</h4>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-outline-primary float-md-right mb-2" asp-action="Create">
+            <i class="fas fa-plus-circle"></i>
+        </a>
+    </div>
+</div>
 
-<p>
-    <a class="btn btn-outline-primary" asp-action="Create">Criar filme</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="text-md-center">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th class="text-md-center">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Synopsis)
-            </th>
-            <th>
+            <th class="text-md-center">
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
-            <th>
+            <th class="text-md-right">
                 @Html.DisplayNameFor(model => model.Length)
             </th>
-            <th>
+            <th class="text-md-right">
                 @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
-            <th></th>
+            <th class="text-md-right">
+                Ações
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model) 
         {
             <tr>
-                <td>
+                <td class="text-md-center">
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                <td>
+                <td class="text-md-center">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Synopsis)
-                </td>
-                <td>
+                <td class="text-md-center">
                     @Html.DisplayFor(modelItem => item.Genre)
                 </td>
-                <td>
+                <td class="text-md-right">
                     @Html.DisplayFor(modelItem => item.Length)
                 </td>
-                <td>
+                <td class="text-md-right">
                     @Html.DisplayFor(modelItem => item.ReleaseDate)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                <td class="text-md-right">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
                 </td>
             </tr>
         }
