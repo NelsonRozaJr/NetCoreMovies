@@ -31,10 +31,9 @@ namespace NetCoreMovies
             services.AddSingleton<IGenreRepository, GenreRepository>();
             services.AddSingleton<IMaturityRepository, MaturityRepository>();
 
-            services.AddControllersWithViews();
-
-            // Para habilitar o refresh de views sem necessidade de dar start da aplicação a cada modificação:
+            // Para habilitar o refresh de views sem necessidade de dar restart da aplicação a cada modificação:
             // PM> install-package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+            // Registrar o método AddRazorRuntimeCompilation junto com o método AddControllersWithViews
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddRazorPages();
