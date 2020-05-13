@@ -1,7 +1,7 @@
 ﻿@model MovieViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar filme";
 }
 
 <h4>Editar filme</h4>
@@ -43,8 +43,8 @@
                 <span asp-validation-for="ReleaseYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Alterar" class="btn btn-outline-primary" />
                 <a asp-action="Index" class="btn btn-outline-info">Catálogo de filmes</a>
+                <input type="submit" value="Alterar" class="btn btn-outline-primary" />
             </div>
         </form>
     </div>

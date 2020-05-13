@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MovieViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Catálogo de filmes";
 }
 
 <div class="row">
@@ -9,7 +9,7 @@
         <h4>Catálogo de filmes</h4>
     </div>
     <div class="col-6">
-        <a class="btn btn-outline-primary float-md-right mb-2" asp-action="Create">
+        <a class="btn btn-outline-primary float-md-right mb-2" asp-action="Create" title="Criar">
             <i class="fas fa-plus-circle"></i>
         </a>
     </div>
@@ -64,13 +64,13 @@
                     @item.ReleaseYear
                 </td>
                 <td class="text-md-right">
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info" title="Detalhes">
                         <i class="fas fa-info-circle"></i>
                     </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary" title="Editar">
                         <i class="far fa-edit"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Excluir">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
