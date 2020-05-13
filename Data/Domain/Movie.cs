@@ -20,10 +20,13 @@ namespace NetCoreMovies.Data.Domain
         public string Synopsis { get; set; }
 
         [Required]
-        public int Length { get; set; }
+        public int Runtime { get; set; }
 
         [Required]
-        public DateTime ReleaseDate { get; set; }
+        public int ReleaseYear { get; set; }
+
+        [Required]
+        public string Maturity { get; set; }
 
         [Required]
         public DateTime SaveDate { get; set; }

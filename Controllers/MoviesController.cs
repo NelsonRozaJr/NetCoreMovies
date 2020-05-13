@@ -5,6 +5,7 @@ using NetCoreMovies.Data.Domain;
 using NetCoreMovies.Data.Repository.Interfaces;
 using NetCoreMovies.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NetCoreMovies.Controllers
@@ -13,18 +14,20 @@ namespace NetCoreMovies.Controllers
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IGenreRepository _genreRepository;
+        private readonly IMaturityRepository _maturityRepository;
         private readonly IMapper _mapper;
 
-        public MoviesController(IMovieRepository movieRepository, IGenreRepository genreRepository, IMapper mapper)
+        public MoviesController(IMovieRepository movieRepository, IGenreRepository genreRepository, IMaturityRepository maturityRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
             _genreRepository = genreRepository;
+            _maturityRepository = maturityRepository;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var movies = await _movieRepository.ToListAsync();
+            var movies = await _movieRepository.GetAllAsync();
             var movieViewModel = _mapper.Map<List<MovieViewModel>>(movies);
 
             return View(movieViewModel);
@@ -53,7 +56,7 @@ namespace NetCoreMovies.Controllers
             var movieViewModel = new MovieViewModel
             {
                 GenreItems = _genreRepository.GetGenreItems(),
-                ReleaseDate = System.DateTime.Now
+                MaturityItems = _maturityRepository.GetMaturityItems()
             };
 
             return View(movieViewModel);
@@ -90,6 +93,7 @@ namespace NetCoreMovies.Controllers
 
             var movieViewModel = _mapper.Map<MovieViewModel>(movie);
             movieViewModel.GenreItems = _genreRepository.GetGenreItems();
+            movieViewModel.MaturityItems = _maturityRepository.GetMaturityItems();
 
             return View(movieViewModel);
         }
@@ -156,6 +160,21 @@ namespace NetCoreMovies.Controllers
             await _movieRepository.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchTerm)
+        {
+            var query = _movieRepository.GetAll();
+            
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(s => s.Title.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            var movies = await query.ToListAsync();
+
+            return View(nameof(Index), _mapper.Map<List<MovieViewModel>>(movies));
         }
     }
 }

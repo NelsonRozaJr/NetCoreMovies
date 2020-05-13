@@ -41,7 +41,12 @@ namespace NetCoreMovies.Data.Repository
             return (await _context.SaveChangesAsync() > 0);
         }
 
-        public async Task<List<Movie>> ToListAsync()
+        public IQueryable<Movie> GetAll()
+        {
+            return _context.Movies;
+        }
+
+        public async Task<List<Movie>> GetAllAsync()
         {
             return await _context.Movies.ToListAsync();
         }

@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-6">
-        <h4>Lista de filmes</h4>
+        <h4>Catálogo de filmes</h4>
     </div>
     <div class="col-6">
         <a class="btn btn-outline-primary float-md-right mb-2" asp-action="Create">
@@ -28,12 +28,15 @@
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
             <th class="text-md-right">
-                @Html.DisplayNameFor(model => model.Length)
+                @Html.DisplayNameFor(model => model.Runtime)
             </th>
             <th class="text-md-right">
-                @Html.DisplayNameFor(model => model.ReleaseDate)
+                @Html.DisplayNameFor(model => model.Maturity)
             </th>
             <th class="text-md-right">
+                @Html.DisplayNameFor(model => model.ReleaseYear)
+            </th>
+            <th class="text-md-center">
                 Ações
             </th>
         </tr>
@@ -52,10 +55,13 @@
                     @item.Genre
                 </td>
                 <td class="text-md-right">
-                    @item.Length
+                    @item.Runtime min.
                 </td>
                 <td class="text-md-right">
-                    @item.ReleaseDate.ToString("dd/MM/yyyy")
+                    @item.Maturity
+                </td>
+                <td class="text-md-right">
+                    @item.ReleaseYear
                 </td>
                 <td class="text-md-right">
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">

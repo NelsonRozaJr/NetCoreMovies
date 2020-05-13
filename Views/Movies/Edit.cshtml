@@ -7,7 +7,7 @@
 <h4>Editar filme</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Synopsis" class="control-label"></label>
-                <input asp-for="Synopsis" class="form-control" />
+                <textarea asp-for="Synopsis" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="Synopsis" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,18 +28,23 @@
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Length" class="control-label"></label>
-                <input asp-for="Length" class="form-control" />
-                <span asp-validation-for="Length" class="text-danger"></span>
+                <label asp-for="Runtime" class="control-label"></label>
+                <input asp-for="Runtime" class="form-control" />
+                <span asp-validation-for="Runtime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                <label asp-for="Maturity" class="control-label"></label>
+                <select asp-for="Maturity" asp-items="@Model.MaturityItems" class="form-control"></select>
+                <span asp-validation-for="Maturity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseYear" class="control-label"></label>
+                <input asp-for="ReleaseYear" class="form-control" />
+                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Alterar" class="btn btn-outline-primary" />
-                <a asp-action="Index" class="btn btn-outline-info">Lista de filmes</a>
+                <a asp-action="Index" class="btn btn-outline-info">Catálogo de filmes</a>
             </div>
         </form>
     </div>

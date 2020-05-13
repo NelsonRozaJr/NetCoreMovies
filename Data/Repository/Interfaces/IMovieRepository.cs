@@ -1,6 +1,7 @@
 ﻿using NetCoreMovies.Data.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -16,7 +17,9 @@ namespace NetCoreMovies.Data.Repository.Interfaces
 
         Task<bool> SaveChangesAsync();
 
-        Task<List<Movie>> ToListAsync();
+        Task<List<Movie>> GetAllAsync();
+
+        IQueryable<Movie> GetAll();
 
         Task<Movie> FirstOrDefaultAsync(Expression<Func<Movie, bool>> expression);
 

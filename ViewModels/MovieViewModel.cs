@@ -27,16 +27,22 @@ namespace NetCoreMovies.ViewModels
 
         [Required(ErrorMessage = "A duração é obrigatória")]
         [Range(1, 600, ErrorMessage = "Duração deve estar compreendida entre 1 e 600")]
-        [Display(Name = "Duração (minutos)")]
-        public int Length { get; set; }
+        [Display(Name = "Duração")]
+        public int Runtime { get; set; }
 
-        [Required(ErrorMessage = "A data de lançamento é obrigatória")]
-        [Display(Name = "Lançamento")]
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        [Required(ErrorMessage = "O ano de lançamento é obrigatório")]
+        [Display(Name = "Ano de lançamento")]
+        public int ReleaseYear { get; set; }
+
+        [Required(ErrorMessage = "A classificação indicativa é obrigatória")]
+        [Display(Name = "Classificação indicativa")]
+        [StringLength(30)]
+        public string Maturity { get; set; }
 
         public DateTime SaveDate { get; set; }
 
         public List<SelectListItem> GenreItems { get; set; }
+
+        public List<SelectListItem> MaturityItems { get; set; }
     }
 }

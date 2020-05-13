@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NetCoreMovies.Data.AutoMapper;
 using NetCoreMovies.Data.Repository;
 using NetCoreMovies.Data.Repository.Context;
 using NetCoreMovies.Data.Repository.Interfaces;
@@ -30,6 +29,7 @@ namespace NetCoreMovies
 
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddSingleton<IGenreRepository, GenreRepository>();
+            services.AddSingleton<IMaturityRepository, MaturityRepository>();
 
             services.AddControllersWithViews();
 
