@@ -26,11 +26,12 @@ namespace NetCoreMovies.ViewModels
         public string Synopsis { get; set; }
 
         [Required(ErrorMessage = "A duração é obrigatória")]
-        [Range(1, 600, ErrorMessage = "Duração deve estar compreendida entre 1 e 600")]
+        [Range(1, int.MaxValue, ErrorMessage = "A duração deve ser maior que zero")]
         [Display(Name = "Duração")]
         public int Runtime { get; set; }
 
         [Required(ErrorMessage = "O ano de lançamento é obrigatório")]
+        [Range(1900, int.MaxValue, ErrorMessage = "O ano de lançamento deve ser maior ou igual a 1900")]
         [Display(Name = "Ano de lançamento")]
         public int ReleaseYear { get; set; }
 
